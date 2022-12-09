@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS><TS version="2.0" language="fr">
+<!DOCTYPE TS>
+<TS version="2.1" language="fr">
 <context>
     <name>Qgeric</name>
     <message>
@@ -11,7 +12,7 @@
         <translation>Passer</translation>
     </message>
     <message>
-        <source>Display selection's results</source>
+        <source>Display selection&apos;s results</source>
         <translation>Affiche la table attributaire de la selection</translation>
     </message>
     <message>
@@ -71,24 +72,28 @@
         <translation>Précisez un périmètre en m:</translation>
     </message>
     <message>
+        <source>Extracts</source>
+        <translation>Extractions</translation>
+    </message>
+    <message>
         <source>Warning</source>
         <translation>Attention</translation>
     </message>
     <message>
         <source>There is no active layer !</source>
-        <translation>Il n'y a aucune couche active !</translation>
+        <translation>Il n&apos;y a aucune couche active !</translation>
     </message>
     <message>
-        <source>You didn't click on a layer's attribute !</source>
-        <translation>Vous n'avez pas cliqué sur un attribut de la couche !</translation>
+        <source>You didn&apos;t click on a layer&apos;s attribute !</source>
+        <translation>Vous n&apos;avez pas cliqué sur un attribut de la couche !</translation>
     </message>
     <message>
-        <source>You must give a non-null value for a point's or line's perimeter !</source>
+        <source>You must give a non-null value for a point&apos;s or line&apos;s perimeter !</source>
         <translation>Vous devez préciser un périmètre non-nul pour un point ou une ligne !</translation>
     </message>
     <message>
         <source>There is no selected layer, or it is not vector nor visible !</source>
-        <translation>Aucune couche n'est sélectionnée, ou celle-ci n'est pas vectorielle ou n'est pas visible !</translation>
+        <translation>Aucune couche n&apos;est sélectionnée, ou celle-ci n&apos;est pas vectorielle ou n&apos;est pas visible !</translation>
     </message>
     <message>
         <source>Radius</source>
@@ -127,7 +132,7 @@
         <translation>Chargement...</translation>
     </message>
     <message>
-        <source>Save this tab's results</source>
+        <source>Save this tab&apos;s results</source>
         <translation>Sauvegarder les résultats de cet onglet</translation>
     </message>
     <message>
@@ -151,12 +156,12 @@
         <translation>Erreur</translation>
     </message>
     <message>
-        <source>The file can't be written.</source>
+        <source>The file can&apos;t be written.</source>
         <translation>Le fichier ne peut être écrit.</translation>
     </message>
     <message>
-        <source>Maybe you don't have the rights or are trying to overwrite an opened file.</source>
-        <translation>Vous n'avez peut-être pas les droits ou tentez d'écraser un fichier utilisé.</translation>
+        <source>Maybe you don&apos;t have the rights or are trying to overwrite an opened file.</source>
+        <translation>Vous n&apos;avez peut-être pas les droits ou tentez d&apos;écraser un fichier utilisé.</translation>
     </message>
     <message>
         <source>Contains</source>
@@ -188,7 +193,7 @@
     </message>
     <message>
         <source>There is no selected feature !</source>
-        <translation>Il n'y a aucune entité sélectionnée</translation>
+        <translation>Il n&apos;y a aucune entité sélectionnée</translation>
     </message>
     <message>
         <source>Length</source>
@@ -203,11 +208,11 @@
         <translation>Éléments sélectionnés</translation>
     </message>
     <message>
-        <source>Highlight feature's centroid</source>
+        <source>Highlight feature&apos;s centroid</source>
         <translation>Mettre en surbrillance le centroide</translation>
     </message>
     <message>
-        <source>Highlight feature's geometry</source>
+        <source>Highlight feature&apos;s geometry</source>
         <translation>Mettre en surbrillance la géométrie</translation>
     </message>
 </context>
