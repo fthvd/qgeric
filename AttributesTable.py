@@ -1,10 +1,10 @@
+# -*- coding: utf-8 -*-
+
 # Qgeric: Graphical queries by drawing simple shapes.
 # Author: Jérémy Kalsron
 #         jeremy.kalsron@gmail.com
-
-# Adds : Francois Thevand
-#        francois.thevand@gmail.com
-
+# Contributor : François Thévand
+#         francois.thevand@gmail.com
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
@@ -19,20 +19,20 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import os, sys
+from qgis import utils
 from qgis.PyQt import QtGui, QtCore
 from qgis.PyQt.QtGui import QIcon, QColor
 from qgis.PyQt.QtCore import Qt, QSize, QDate, QTime, QDateTime, QTranslator, QCoreApplication, QVariant
-
-from qgis.PyQt.QtWidgets import (QWidget, QDesktopWidget, QTabWidget, QVBoxLayout, QProgressDialog, 
-                                QStatusBar, QPushButton, QTableWidget, QTableWidgetItem, QFileDialog, 
-                                QToolBar, QAction, QApplication, QHeaderView, QInputDialog, QComboBox, 
+from qgis.PyQt.QtWidgets import (QWidget, QDesktopWidget, QTabWidget, QVBoxLayout, QProgressDialog,
+                                QStatusBar, QPushButton, QTableWidget, QTableWidgetItem, QFileDialog,
+                                QToolBar, QAction, QApplication, QHeaderView, QInputDialog, QComboBox,
                                 QLineEdit, QMenu, QWidgetAction, QMessageBox, QDateEdit, QTimeEdit, QDateTimeEdit)
-from qgis.core import QgsWkbTypes, QgsVectorLayer, QgsProject, QgsLayerTreeGroup, QgsGeometry, QgsCoordinateTransform, QgsCoordinateReferenceSystem
+from qgis.core import QgsWkbTypes, QgsVectorLayer, QgsProject, QgsGeometry, QgsCoordinateTransform, QgsCoordinateReferenceSystem
 from qgis.gui import QgsMessageBar, QgsHighlight
-from qgis.utils import *
 from functools import partial
 from . import odswriter as ods
 from . import resources
+from qgis.utils import *
 
 # Display and export attributes from all active layers
 class AttributesTable(QWidget):
@@ -209,7 +209,9 @@ class AttributesTable(QWidget):
         self.canvas.refresh() 
     
     # Add a new tab
-    def addLayer(self, layer, headers, types, features):
+
+    # Modification F. Thévand ajout paramètre visible :
+    def addLayer(self, layer, headers, types, features, visible):
         tab = QWidget()
         tab.layer = layer
         p1_vertical = QVBoxLayout(tab)
@@ -232,17 +234,29 @@ class AttributesTable(QWidget):
             m = 0
             for feature in features:
                 n = 0
-                for cell in feature.attributes():
+
+                # Ancienne syntaxe :
+                #                for cell in feature.attributes():
+                #                    item = QTableWidgetItem()
+                #                    item.setData(Qt.DisplayRole, cell)
+                #                    item.setFlags(item.flags() ^ Qt.ItemIsEditable)
+                #                    item.feature = feature
+                #                    table.setItem(m, n, item)
+                #                    n += 1
+
+                # Modification F. Thévand :
+                for idx in visible:
                     item = QTableWidgetItem()
-                    item.setData(Qt.DisplayRole, cell)
+                    item.setData(Qt.DisplayRole, feature[idx])
+                    # Fin modification
                     item.setFlags(item.flags() ^ Qt.ItemIsEditable)
                     item.feature = feature
                     table.setItem(m, n, item)
                     n += 1
                 m += 1
-                self.loadingWindow.setValue(int((float(m)/nbrow)*100))  
+                self.loadingWindow.setValue(int((float(m) / nbrow) * 100))
                 QApplication.processEvents()
-            
+
         else:
             table.setRowCount(0)  
                             
