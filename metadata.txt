@@ -12,9 +12,9 @@ about[fr]=Ce plugin permet les interrogations graphiques par dessin de formes si
 changelog=1.95 par François Thévand : prise en compte de la configuration d'affichage des colonnes attributaires, maintien du format numérique des données chiffrées dans les exportations ods, maintien permanent au premier plan de la fenêtre des résultats de sélection, suppression des sélections dans la fenêtre carte, enregistrement des couches mémoire dans un groupe Extractions, enregistrement par défaut des ods dans un sous-dossier Extractions du dossier contenant le projet.
  1.91 correction d'un bug dans la mise en évidence des items sélectionnés
 
-homepage=https://github.com/jeremyk6/qgeric
-tracker=https://github.com/jeremyk6/qgeric/issues
-repository=https://github.com/jeremyk6/qgeric
+homepage=https://github.com/fthvd/qgeric
+tracker=https://github.com/fthvd/qgeric/issues
+repository=https://github.com/fthvd/qgeric
 
 tags=selection, buffer, query, attribute, fields, table, attributes table
 
