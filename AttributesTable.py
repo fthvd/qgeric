@@ -432,40 +432,59 @@ class AttributesTable(QWidget):
         file = QFileDialog.getSaveFileName(self, self.tr('Save in...'),self.project.homePath() + '/Extractions', self.tr('OpenDocument Spreadsheet (*.ods)'))
         if file[0]:
             try:
-                with ods.writer(open(file[0],"wb")) as odsfile:
+                with ods.writer(open(file[0], "wb")) as odsfile:
                     tabs = None
                     if active:
                         tabs = self.tabWidget.currentWidget().findChildren(QTableWidget)
                     else:
                         tabs = self.tabWidget.findChildren(QTableWidget)
                     for table in reversed(tabs):
-                        sheet = odsfile.new_sheet(table.title[:20]+'...') # For each tab in the container, a new sheet is created
-                        sheet.writerow([table.title]) # As the tab's title's lenght is limited, the full name of the layer is written in the first row
+                        sheet = odsfile.new_sheet(
+                            table.title[:20] + '...')  # For each tab in the container, a new sheet is created
+                        sheet.writerow([
+                                           table.title])  # As the tab's title's lenght is limited, the full name of the layer is written in the first row
                         nb_row = table.rowCount()
                         nb_col = table.columnCount()
-                        
+
                         # Fetching and writing of the table's header
                         header = []
-                        for i in range(0,nb_col):
+                        for i in range(0, nb_col):
                             header.append(table.horizontalHeaderItem(i).text())
                         sheet.writerow(header)
-                        
+
                         # Fetching and writing of the table's items
-                        for i in range(0,nb_row):
+                        for i in range(0, nb_row):
                             row = []
-                            for j in range(0,nb_col):
-                                row.append(table.item(i,j).text())
+                            # Modification F. THEVAND pour conversion des chiffres du texte en float:
+                            for j in range(0, nb_col):
+                                attr = table.item(i, j).text()
+                                # Test pour colonne CP ou code insee commençant par zéro
+                                # avec prise en compte des flottants de type 0,n
+                                if attr[:1] != '0':
+                                    try:
+                                        attr = float(attr)
+                                    except:
+                                        pass
+                                elif attr[:2] == '0,' or attr[:2] == '0.':
+                                    try:
+                                        attr = float(attr)
+                                    except:
+                                        pass
+                                row.append(attr)
+                            # Fin modification F. THEVAND
                             if not table.isRowHidden(i):
                                 sheet.writerow(row)
                     return True
             except IOError:
-                QMessageBox.critical(self, self.tr('Error'), self.tr('The file can\'t be written.')+'\n'+self.tr('Maybe you don\'t have the rights or are trying to overwrite an opened file.'))
+                QMessageBox.critical(self, self.tr('Error'),
+                                     self.tr('The file can\'t be written.') + '\n' + self.tr(
+                                         'Maybe you don\'t have the rights or are trying to overwrite an opened file.'))
                 return False
-    
+
     def center(self):
-        screen = QDesktopWidget().screenGeometry()
-        size = self.geometry()
-        self.move((screen.width()-size.width())/2, (screen.height()-size.height())/2)
+            screen = QDesktopWidget().screenGeometry()
+            size = self.geometry()
+            self.move((screen.width()-size.width())/2, (screen.height()-size.height())/2)
         
     def clear(self):
         self.tabWidget.clear()
